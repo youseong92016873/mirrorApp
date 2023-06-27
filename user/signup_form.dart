@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'login.dart';
 import 'user_provider.dart';
 import '../http_setup.dart';
+import 'package:prc6/widget/profile.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -16,10 +17,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final GlobalKey<FormState> _nicknameKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _phonekey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _emailKey = GlobalKey<FormState>();
-  final GlobalKey<FormState> _passwordKey = GlobalKey<FormState>();
   final TextEditingController nicknameController = TextEditingController();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -53,13 +50,6 @@ class _SignUpPageState extends State<SignUpPage> {
           .showSnackBar(SnackBar(content: Text(" ${jsonResponse['Message']}")));
       print('success');
 
-      //userprovider에 로그인 정보 업데이트
-      Provider.of<UserProvider>(context, listen: false).setEmail(emailController.text);
-      Provider.of<UserProvider>(context, listen: false).setName(nameController.text);
-      Provider.of<UserProvider>(context, listen: false).setNickname(nicknameController.text);
-      Provider.of<UserProvider>(context, listen: false).setPhone(phoneController.text);
-      Provider.of<UserProvider>(context, listen: false).registerUser();
-
       showDialog(
         context: context,
         builder: (context) {
@@ -72,7 +62,18 @@ class _SignUpPageState extends State<SignUpPage> {
         },
       );
       Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => ProfilePage(
+          name: nameController.text,
+          email: emailController.text,
+          phone: phoneController.text,
+        )),
+      );
+
+
       print('Dialog shown');
+
     } else {
       print('Response Status Code : ${response.statusCode}');
       print('Response Body : ${response.body}');

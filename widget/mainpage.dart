@@ -2,18 +2,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:prc6/coummunity/community.dart';
-import 'package:prc6/user/login.dart';
+import 'package:prc6/user/signup_form.dart';
 import 'package:http/http.dart' as http;
 import 'package:prc6/widget/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 int _curPageIndex = 0;
 
-void main() {
-  runApp(MainPage());
-}
+// void main() {
+//   runApp(MainPage());
+// }
 
 class MainPage extends StatefulWidget {
+  final String? name;
+  final String? email;
+  final String? phone;
+
+  MainPage({this.name, this.email, this.phone});
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -203,7 +210,11 @@ class _MainPageState extends State<MainPage> {
           if (index == 0) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) =>MainPage()),
+              MaterialPageRoute(builder: (context) =>MainPage(
+                name: widget.name,
+                email: widget.email,
+                phone: widget.phone,
+              )),
             );
           }
           if (index == 1) {
@@ -221,7 +232,11 @@ class _MainPageState extends State<MainPage> {
           if (index == 3) {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+              MaterialPageRoute(builder: (context) => ProfilePage(
+                name: widget.name ?? "",
+                email: widget.email ?? "",
+                phone: widget.phone ?? "",
+              )),
             );
           }
         },

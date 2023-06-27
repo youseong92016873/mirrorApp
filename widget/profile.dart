@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(MaterialApp(
-  home: ProfilePage(),
-));
+import 'package:get/get.dart';
+import 'package:prc6/user/signup_form.dart';
 
 class ProfilePage extends StatelessWidget {
+  final String name;
+  final String email;
+  final String phone;
+
+  ProfilePage({
+    required this.name,
+   required this.email,
+    required this.phone,
+  });
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-
       appBar: AppBar(
-        title: Text('내 정보'),
+        title: Text('내 정보'
+        ,style:TextStyle(
+            color: Colors.black
+        )),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -40,7 +49,7 @@ class ProfilePage extends StatelessWidget {
             ),
             SizedBox(height: 10),
             Text(
-              '유성경',
+            '$name',
               style: TextStyle(
                   color: Colors.black,
                   letterSpacing: 2,
@@ -56,14 +65,12 @@ class ProfilePage extends StatelessWidget {
                   letterSpacing: 2
               ),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 30),
             Text(
-              '010-5564-8202',
+              '$phone',
               style: TextStyle(
-                  color: Colors.black,
-                  letterSpacing: 2,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
+                  color: Colors.grey,
+                  letterSpacing: 2
               ),
             ),
             SizedBox(height: 30),
@@ -77,7 +84,7 @@ class ProfilePage extends StatelessWidget {
                   width: 10,
                 ),
                 Text(
-                  'keith@mail.com',
+                  '$email',
                   style: TextStyle(
                       color: Colors.grey[400],
                       fontSize: 18,

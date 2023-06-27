@@ -52,11 +52,12 @@ class _CreatePageState extends State<CreatePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          centerTitle: true,
         backgroundColor:Colors.white,
         title: Text('게시물 작성',style: TextStyle(
         color:Colors.black,
         fontWeight:FontWeight.bold,
-        fontSize: 30,),
+        fontSize: 20),
 
         )
       ),
